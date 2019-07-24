@@ -8,20 +8,45 @@
   <component name="ChangeListManager">
     <list default="true" id="60318d0f-1cbb-4342-b9cd-77fff9fb5f3f" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/csc413_tankgame_aordorica_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csc413-tankgame-aordorica.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/csc413_tankgame_aordorica_jar/csc413-tankgame-aordorica.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/Display.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/Game.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/GameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/ImageLoader.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/Launcher.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/Tank.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/GameFiles/TankControl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/META-INF/csc413-tankgame-aordorica.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/Map/BreakableWall.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/Map/LandScape.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/Map/UnbreakableWall.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/Map/Wall.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/plant.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/tank1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/plant.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/tank1.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/Display.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/Game.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/GameObject.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/ImageLoader.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/Launcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameFiles/SpriteSheet.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/Tank.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/GameFiles/TankControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Map/BreakableWall.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Map/LandScape.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Map/UnbreakableWall.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/Map/Wall.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resorces/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resorces/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/csc413-tankgame-aordorica/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/resources/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,28 +62,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Map/UnbreakableWall.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Map/BreakableWall.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameFiles/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+            <state relative-caret-position="255">
+              <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -135,10 +142,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameFiles/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="81" selection-start-line="81" selection-end-line="81" />
+            <state relative-caret-position="212">
+              <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1646#1713#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameFiles/SpriteSheet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+              <folding>
+                <element signature="e#125#126#0" expanded="true" />
+                <element signature="e#159#160#0" expanded="true" />
+                <element signature="e#228#229#0" expanded="true" />
+                <element signature="e#289#290#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -148,7 +171,7 @@
         <entry file="file://$PROJECT_DIR$/src/GameFiles/ImageLoader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -192,9 +215,10 @@
         <option value="$PROJECT_DIR$/src/GameFiles/Tank.java" />
         <option value="$PROJECT_DIR$/src/GameFiles/TankControl.java" />
         <option value="$PROJECT_DIR$/src/GameFiles/Launcher.java" />
-        <option value="$PROJECT_DIR$/src/GameFiles/ImageLoader.java" />
         <option value="$PROJECT_DIR$/src/GameFiles/Display.java" />
+        <option value="$PROJECT_DIR$/src/GameFiles/SpriteSheet.java" />
         <option value="$PROJECT_DIR$/src/GameFiles/Game.java" />
+        <option value="$PROJECT_DIR$/src/GameFiles/ImageLoader.java" />
       </list>
     </option>
   </component>
@@ -305,12 +329,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1563921946945</updated>
-      <workItem from="1563921948624" duration="12427000" />
+      <workItem from="1563921948624" duration="14771000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12427000" />
+    <option name="totallyTimeSpent" value="14771000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -325,11 +349,11 @@
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="1" />
-      <window_info anchor="bottom" id="Terminal" order="2" />
+      <window_info anchor="bottom" id="Terminal" order="2" weight="0.32891566" />
       <window_info anchor="bottom" id="Database Changes" order="3" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="5" />
-      <window_info anchor="bottom" id="Find" order="6" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32891566" />
       <window_info anchor="bottom" id="Run" order="7" visible="true" weight="0.32891566" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
@@ -355,9 +379,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/GameFiles/Game.java</url>
-          <line>81</line>
+          <line>34</line>
           <properties />
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -384,13 +408,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameFiles/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GameFiles/TankControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -408,12 +425,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameFiles/Launcher.java">
+    <entry file="file://$PROJECT_DIR$/src/GameFiles/Display.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+        <state relative-caret-position="375">
+          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1366#1367#0" expanded="true" />
+          </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/Test.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameFiles/Tank.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -447,24 +472,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameFiles/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/GameFiles/Launcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="81" selection-start-line="81" selection-end-line="81" />
+        <state relative-caret-position="255">
+          <caret line="17" column="1" lean-forward="true" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameFiles/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameFiles/SpriteSheet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#125#126#0" expanded="true" />
+            <element signature="e#159#160#0" expanded="true" />
+            <element signature="e#228#229#0" expanded="true" />
+            <element signature="e#289#290#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameFiles/Display.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib/src.zip!/java.desktop/javax/imageio/ImageIO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="54" column="5" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
+        <state relative-caret-position="177">
+          <caret line="1399" column="18" selection-start-line="1399" selection-start-column="18" selection-end-line="1399" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameFiles/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="34" column="49" selection-start-line="34" selection-start-column="49" selection-end-line="34" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1337#1338#0" expanded="true" />
-            <element signature="e#1366#1367#0" expanded="true" />
+            <element signature="e#1646#1713#0" />
           </folding>
         </state>
       </provider>
@@ -472,7 +520,7 @@
     <entry file="file://$PROJECT_DIR$/src/GameFiles/ImageLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -9,7 +9,7 @@ import java.nio.Buffer;
 public class ImageLoader {
     public static BufferedImage loadImages(String path){
         try {
-            return ImageIO.read(ImageLoader.class.getResource(path));
+            return ImageIO.read(getClass.class.getResource(path));
         } catch (IOException e) {
             System.exit(1);
         }
