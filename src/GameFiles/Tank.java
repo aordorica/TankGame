@@ -4,14 +4,14 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
-public class Tank extends GameObject{
+public class Tank implements GameObject{
     private int x;
     private int y;
     private int vx;
     private int vy;
     private int angle;
 
-    private final int R = 2;
+    private final int R = 1;
     private final int ROTATIONSPEED = 4;
 
 

@@ -15,7 +15,8 @@ public class GameWorld extends JComponent implements Runnable{
     private Graphics g;
     private BufferedImage buffer;
     private Thread thread;
-    private BufferedImage temp = null;
+    private BufferedImage tank1Img = null;
+    private BufferedImage tank2Img = null;
     private BufferedImage gameScreen = null;
 
     public static void main(String[] argv){
@@ -43,13 +44,17 @@ public class GameWorld extends JComponent implements Runnable{
 
     private void init() {
 
-        //assign tank image into Tank variable temp
-        temp = ImageLoader.loadImages("tank1.png");
+        //assign tank image into Tank variable tank1Img
+        tank1Img = ImageLoader.loadImages("tank1.png");
+        tank2Img = ImageLoader.loadImages("plant.png");
 
-        tank1 = new Tank(200, 200, 0, 0, 0, temp);
-        TankControl tc1 = new TankControl(tank1, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER, KeyEvent.VK_ESCAPE);
+        tank1 = new Tank(200, 200, 0, 0, 0, tank1Img);
+        tank2 = new Tank(200, 200, 0, 0, 0, tank2Img);
+        TankControl tank1Control = new TankControl(tank1, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER, KeyEvent.VK_ESCAPE);
+        TankControl tank2Control = new TankControl(tank2, KeyEvent.VK_E, KeyEvent.VK_S, KeyEvent.VK_S, KeyEvent.VK_D, KeyEvent.VK_ENTER, KeyEvent.VK_ESCAPE);
 
-        this.addKeyListener(tc1);
+        this.addKeyListener(tank1Control);
+        this.addKeyListener(tank2Control);
     }
 
 
@@ -71,11 +76,12 @@ public class GameWorld extends JComponent implements Runnable{
     public void paint(Graphics graphics){
         gameScreen = (BufferedImage) createImage(SCREEN_WIDTH, SCREEN_HEIGHT);
         tank1.drawImage(gameScreen.createGraphics());
+        tank2.drawImage(gameScreen.createGraphics());
         graphics.drawImage(gameScreen, 0, 0, null);
     }
 
     private void update(){
         tank1.update();
-        tank2.update();
+//        tank2.update();
     }
 }
