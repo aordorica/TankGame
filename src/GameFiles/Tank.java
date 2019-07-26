@@ -16,7 +16,7 @@ public class Tank extends GameObject{
 
 
 
-    private BufferedImage img;
+    public BufferedImage img;
     private boolean UpPressed;
     private boolean DownPressed;
     private boolean RightPressed;

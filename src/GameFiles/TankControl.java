@@ -18,14 +18,16 @@ public class TankControl implements KeyListener {
     private final int right;
     private final int left;
     private final int shoot;
+    private final int esc;
 
-    public TankControl(Tank t1, int up, int down, int left, int right, int shoot) {
+    public TankControl(Tank t1, int up, int down, int left, int right, int shoot, int esc) {
         this.t1 = t1;
         this.up = up;
         this.down = down;
         this.right = right;
         this.left = left;
         this.shoot = shoot;
+        this.esc = esc;
     }
 
     @Override
@@ -35,6 +37,7 @@ public class TankControl implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent ke) {
+        System.out.println("This key is pressed: " + ke.getKeyCode());
         int keyPressed = ke.getKeyCode();
         if (keyPressed == up) {
             this.t1.toggleUpPressed();
@@ -47,6 +50,9 @@ public class TankControl implements KeyListener {
         }
         if (keyPressed == right) {
             this.t1.toggleRightPressed();
+        }
+        if (keyPressed == esc) {
+            System.exit(0);
         }
 
 
