@@ -12,7 +12,7 @@ public class Tank implements GameObject{
     private int angle;
 
     private final int R = 1;
-    private final int ROTATIONSPEED = 4;
+    private final int ROTATIONSPEED = 2;
 
 
 
@@ -117,14 +117,14 @@ public class Tank implements GameObject{
         if (x < 30) {
             x = 30;
         }
-        if (x >= Launcher.SCREEN_WIDTH - 88) {
-            x = Launcher.SCREEN_WIDTH - 88;
+        if (x >= GameWorld.SCREEN_WIDTH - 88) {
+            x = GameWorld.SCREEN_WIDTH - 88;
         }
         if (y < 40) {
             y = 40;
         }
-        if (y >= Launcher.SCREEN_HEIGHT - 80) {
-            y = Launcher.SCREEN_HEIGHT - 80;
+        if (y >= GameWorld.SCREEN_HEIGHT - 80) {
+            y = GameWorld.SCREEN_HEIGHT - 80;
         }
     }
 
@@ -141,4 +141,13 @@ public class Tank implements GameObject{
         g2d.drawImage(this.img, rotation, null);
     }
 
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
+    }
 }

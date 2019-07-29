@@ -10,4 +10,10 @@ public interface GameObject {
     int health = 0;
     BufferedImage img = null;
     Boolean canBeShot = null;
+
+    public int getWidth();
+
+    public int getHeight();
+
+    public void paint(Graphics g);
 }
