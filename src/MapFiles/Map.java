@@ -42,4 +42,8 @@ public class Map implements GameObject {
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public void render(Graphics g) {
+    }
 }

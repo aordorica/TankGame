@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.security.PrivateKey;
 import java.util.HashMap;
 
 public class GameWorld extends JComponent implements Runnable{
@@ -18,11 +17,13 @@ public class GameWorld extends JComponent implements Runnable{
 
     private Thread thread;
     private Boolean running;
+    private static JFrame frame;
 
     //GameWorld Objects
     private Map gameMap;
     private Tank tank1;
     private Tank tank2;
+    private BackgroundLandscape background;
     private BreakableWall breakWall;
     private UnbreakableWall normalWall;
     private BufferedImage bg;
@@ -30,7 +31,7 @@ public class GameWorld extends JComponent implements Runnable{
 
     public static void main(String[] argv){
 
-        JFrame frame = new JFrame("Tank Game");
+        frame = new JFrame("Tank Game");
         GameWorld game = new GameWorld();
         game.init();
 
@@ -38,10 +39,7 @@ public class GameWorld extends JComponent implements Runnable{
         GraphicsDevice screen = environment.getDefaultScreenDevice();
         screen.setFullScreenWindow(frame);
 
-//        SCREEN_HEIGHT = screen.getFullScreenWindow().getSize().height;
-//        SCREEN_WIDTH = screen.getFullScreenWindow().getSize().width;
-
-        //frame.setSize(new Dimension(screen.getFullScreenWindow().getSize()));
+        frame.setSize(new Dimension(screen.getFullScreenWindow().getSize()));
         frame.getContentPane().add("Center", game);
         game.start();
     }
@@ -78,6 +76,8 @@ public class GameWorld extends JComponent implements Runnable{
 
         tank1 = new Tank(200, 200, 0, 0, 0, tank1Img);
         tank2 = new Tank(400, 200, 0, 0, 0, tank2Img);
+        background = new BackgroundLandscape(SCREEN_WIDTH, SCREEN_HEIGHT, bg);
+
         TankControl tank1Control = new TankControl(tank1, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER, KeyEvent.VK_ESCAPE);
         TankControl tank2Control = new TankControl(tank2, KeyEvent.VK_E, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_F, KeyEvent.VK_ENTER, KeyEvent.VK_ESCAPE);
 
@@ -88,7 +88,7 @@ public class GameWorld extends JComponent implements Runnable{
     public void loadImages() {
         imageHashMap.put("tank1", ImageLoader.loadImages("tank1.png"));
         imageHashMap.put("tank2", ImageLoader.loadImages("plant.png"));
-        imageHashMap.put("Background", ImageLoader.loadImages("MISSION1.jpg"));
+        imageHashMap.put("Background", ImageLoader.loadImages("Background.bmp"));
         imageHashMap.put("Missile", ImageLoader.loadImages("tank1.png"));
         imageHashMap.put("BreakableWall", ImageLoader.loadImages("tank1.png"));
         imageHashMap.put("UnBreakableWall", ImageLoader.loadImages("tank1.png"));
@@ -112,13 +112,11 @@ public class GameWorld extends JComponent implements Runnable{
 
     public void paint(Graphics graphics){
         Graphics2D g2 = (Graphics2D) graphics;
-        Graphics2D buffer = bg.createGraphics();
 
-        this.tank1.drawImage(buffer);
-        this.tank2.drawImage(buffer);
-
-        g2.drawImage(bg, 0, 0, null);
-        graphics.dispose();
+        this.tank1.render(g2);
+        this.background.render(g2);
+        this.tank2.render(g2);
+        g2.dispose();
     }
 
     private void update(){

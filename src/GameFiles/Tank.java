@@ -83,7 +83,6 @@ public class Tank implements GameObject{
             this.rotateRight();
         }
 
-
     }
 
     private void rotateLeft() {
@@ -134,7 +133,8 @@ public class Tank implements GameObject{
     }
 
 
-    void drawImage(Graphics g) {
+    @Override
+    public void render(Graphics g) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
         rotation.rotate(Math.toRadians(angle), this.img.getWidth() / 2.0, this.img.getHeight() / 2.0);
         Graphics2D g2d = (Graphics2D) g;

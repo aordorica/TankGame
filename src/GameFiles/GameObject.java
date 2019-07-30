@@ -15,5 +15,5 @@ public interface GameObject {
 
     public int getHeight();
 
-    public void paint(Graphics g);
+    public void render(Graphics g);
 }

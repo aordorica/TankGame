@@ -1,5 +1,7 @@
 package MapFiles;
 
+import java.awt.*;
+
 public class UnbreakableWall extends Wall{
     @Override
     public int getWidth() {
@@ -9,5 +11,10 @@ public class UnbreakableWall extends Wall{
     @Override
     public int getHeight() {
         return 0;
+    }
+
+    @Override
+    public void render(Graphics g) {
+
     }
 }
