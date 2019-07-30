@@ -15,8 +15,6 @@ public class BackgroundLandscape implements GameObject {
         this.width = width;
         this.height = height;
         this.img = img;
-
-
     }
 
     @Override
@@ -32,6 +30,6 @@ public class BackgroundLandscape implements GameObject {
     @Override
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(img,0, 0, null);
+        g2d.drawImage(img,0, 0, width, height, null);
     }
 }

@@ -20,7 +20,7 @@ public class GameWorld extends JComponent implements Runnable{
     private static JFrame frame;
 
     //GameWorld Objects
-    private Map gameMap;
+    private MapLoader gameMap;
     private Tank tank1;
     private Tank tank2;
     private BackgroundLandscape background;
@@ -39,7 +39,7 @@ public class GameWorld extends JComponent implements Runnable{
         GraphicsDevice screen = environment.getDefaultScreenDevice();
         screen.setFullScreenWindow(frame);
 
-        frame.setSize(new Dimension(screen.getFullScreenWindow().getSize()));
+        frame.setSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         frame.getContentPane().add("Center", game);
         game.start();
     }
@@ -72,7 +72,7 @@ public class GameWorld extends JComponent implements Runnable{
         BufferedImage tank2Img = imageHashMap.get("tank2");
         bg = imageHashMap.get("Background");
 
-        gameMap = new Map("mapLayout.txt");
+        gameMap = new MapLoader("mapLayout.txt");
 
         tank1 = new Tank(200, 200, 0, 0, 0, tank1Img);
         tank2 = new Tank(400, 200, 0, 0, 0, tank2Img);
@@ -90,8 +90,8 @@ public class GameWorld extends JComponent implements Runnable{
         imageHashMap.put("tank2", ImageLoader.loadImages("plant.png"));
         imageHashMap.put("Background", ImageLoader.loadImages("Background.bmp"));
         imageHashMap.put("Missile", ImageLoader.loadImages("tank1.png"));
-        imageHashMap.put("BreakableWall", ImageLoader.loadImages("tank1.png"));
-        imageHashMap.put("UnBreakableWall", ImageLoader.loadImages("tank1.png"));
+        imageHashMap.put("BreakableWall", ImageLoader.loadImages("Wall1.gif"));
+        imageHashMap.put("UnbreakableWall", ImageLoader.loadImages("Wall2.gif"));
     }
 
 
@@ -113,8 +113,8 @@ public class GameWorld extends JComponent implements Runnable{
     public void paint(Graphics graphics){
         Graphics2D g2 = (Graphics2D) graphics;
 
-        this.tank1.render(g2);
         this.background.render(g2);
+        this.tank1.render(g2);
         this.tank2.render(g2);
         g2.dispose();
     }

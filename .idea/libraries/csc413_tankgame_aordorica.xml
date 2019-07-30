@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="csc413-tankgame-aordorica">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/csc413_tankgame_aordorica_jar/csc413-tankgame-aordorica.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
