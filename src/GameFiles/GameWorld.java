@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class GameWorld extends JComponent implements Runnable{
     public static final int SCREEN_WIDTH = 1280;
     public static final int SCREEN_HEIGHT = 960;
+    private static GameWorld game;
 
     private int width = SCREEN_WIDTH;
     private int height = SCREEN_HEIGHT;
@@ -30,9 +31,9 @@ public class GameWorld extends JComponent implements Runnable{
     public HashMap<String, BufferedImage> imageHashMap;
 
     public static void main(String[] argv){
-
         frame = new JFrame("Tank Game");
-        GameWorld game = new GameWorld();
+
+        game = new GameWorld();
         game.init();
 
         GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -108,6 +109,10 @@ public class GameWorld extends JComponent implements Runnable{
             }
         }
 
+    }
+
+    public static GameWorld getGame(){
+        return game;
     }
 
     public void paint(Graphics graphics){
