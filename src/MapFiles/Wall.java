@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 public abstract class Wall implements GameObject {
 
     Boolean isbreakable;
-    BufferedImage image;
+    private BufferedImage image;
     private int width;
     private int height;
     private int locateX = 0;
@@ -33,6 +33,12 @@ public abstract class Wall implements GameObject {
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(image, locateX, locateY, width, height, null);
+    }
+
+    public void collision(){
+        if(isbreakable){
+            //getting shot code herd
+        }
     }
 
 

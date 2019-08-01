@@ -5,25 +5,27 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class Tank implements GameObject{
+
+
     private int x;
     private int y;
     private int vx;
     private int vy;
-    private int angle;
+    private float angle;
 
     private final int R = 1;
-    private final int ROTATIONSPEED = 2;
+    private final float ROTATIONSPEED = 2.0f;
 
 
 
-    public BufferedImage img;
+    private BufferedImage img;
     private boolean UpPressed;
     private boolean DownPressed;
     private boolean RightPressed;
     private boolean LeftPressed;
 
 
-    Tank(int x, int y, int vx, int vy, int angle, BufferedImage img) {
+    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage img) {
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -33,6 +35,9 @@ public class Tank implements GameObject{
 
     }
 
+    void setX(int x){ this.x = x; }
+
+    void setY(int y) { this. y = y;}
 
     void toggleUpPressed() {
         this.UpPressed = true;
@@ -66,9 +71,7 @@ public class Tank implements GameObject{
         this.LeftPressed = false;
     }
 
-
-
-    public void update() {
+    void update() {
         if (this.UpPressed) {
             this.moveForwards();
         }
@@ -82,7 +85,6 @@ public class Tank implements GameObject{
         if (this.RightPressed) {
             this.rotateRight();
         }
-
     }
 
     private void rotateLeft() {
@@ -116,29 +118,20 @@ public class Tank implements GameObject{
         if (x < 30) {
             x = 30;
         }
-        if (x >= GameWorld.SCREEN_WIDTH - 88) {
-            x = GameWorld.SCREEN_WIDTH - 88;
+        if (x >= GameConstants.GAME_SCREEN_WIDTH - 88) {
+            x = GameConstants.GAME_SCREEN_WIDTH - 88;
         }
         if (y < 40) {
             y = 40;
         }
-        if (y >= GameWorld.SCREEN_HEIGHT - 80) {
-            y = GameWorld.SCREEN_HEIGHT - 80;
+        if (y >= GameConstants.GAME_SCREEN_HEIGHT - 80) {
+            y = GameConstants.GAME_SCREEN_HEIGHT - 80;
         }
     }
 
     @Override
     public String toString() {
         return "x=" + x + ", y=" + y + ", angle=" + angle;
-    }
-
-
-    @Override
-    public void render(Graphics g) {
-        AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
-        rotation.rotate(Math.toRadians(angle), this.img.getWidth() / 2.0, this.img.getHeight() / 2.0);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(this.img, rotation, null);
     }
 
     @Override
@@ -150,4 +143,15 @@ public class Tank implements GameObject{
     public int getHeight() {
         return 0;
     }
+
+    @Override
+    public void render(Graphics g) {
+        AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
+        rotation.rotate(Math.toRadians(angle), this.img.getWidth() / 2.0, this.img.getHeight() / 2.0);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(this.img, rotation, null);
+    }
+
+
+
 }

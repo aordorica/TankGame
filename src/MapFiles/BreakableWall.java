@@ -4,16 +4,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class BreakableWall extends Wall{
-    BufferedImage image;
+    private BufferedImage image;
     private int width;
     private int height;
     private int locateX = 0;
     private int locateY = 0;
+    private int health = 10;
 
-    public BreakableWall(BufferedImage img, int width, int height) {
+    public BreakableWall(BufferedImage img, int x, int y) {
         this.isbreakable = true;
-        this.width = width;
-        this.height = height;
+        locateX = x;
+        locateY = y;
         this.image = img;
     }
 
@@ -32,9 +33,9 @@ public class BreakableWall extends Wall{
         this.locateY = y;
     }
 
-    @Override
-    public void render(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(image, locateX, locateY, width, height, null);
+
+    public void render(Graphics2D g2d) {
+        //System.out.println("Breakable Wall Block: \nLocateX: " + locateX + "LocateY: " +locateY);
+        g2d.drawImage(image, locateX, locateY, null);
     }
 }

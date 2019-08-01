@@ -35,7 +35,7 @@ public class TankControl implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent ke) {
-        System.out.println("This key is pressed: " + ke.getKeyCode());
+        //System.out.println("This key is pressed: " + ke.getKeyCode());
         int keyPressed = ke.getKeyCode();
         if (keyPressed == up) {
             this.t1.toggleUpPressed();
