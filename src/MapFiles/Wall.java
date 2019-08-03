@@ -30,8 +30,7 @@ public abstract class Wall implements GameObject {
     }
 
     @Override
-    public void render(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    public void render(Graphics2D g2d) {
         g2d.drawImage(image, locateX, locateY, width, height, null);
     }
 

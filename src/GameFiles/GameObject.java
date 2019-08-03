@@ -1,7 +1,6 @@
 package GameFiles;
 
 import java.awt.*;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public interface GameObject {
@@ -11,9 +10,9 @@ public interface GameObject {
     BufferedImage img = null;
     Boolean canBeShot = null;
 
-    public int getWidth();
+    int getWidth();
 
-    public int getHeight();
+    int getHeight();
 
-    public void render(Graphics g);
+    void render(Graphics2D g2d);
 }

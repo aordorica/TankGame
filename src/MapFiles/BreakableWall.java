@@ -1,9 +1,11 @@
 package MapFiles;
 
+import GameFiles.Collidable;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class BreakableWall extends Wall{
+public class BreakableWall extends Wall implements Collidable {
     private BufferedImage image;
     private int width;
     private int height;

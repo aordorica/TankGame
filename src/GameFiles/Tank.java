@@ -3,10 +3,13 @@ package GameFiles;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
-public class Tank implements GameObject{
+public class Tank implements Collidable, GameObject{
 
-
+    public ArrayList<Bullet> bullets = new ArrayList<>();
+    private GameWorld game;
+    public int bulletCount;
     private int x;
     private int y;
     private int vx;
@@ -14,30 +17,34 @@ public class Tank implements GameObject{
     private float angle;
 
     private final int R = 1;
-    private final float ROTATIONSPEED = 2.0f;
-
-
-
+    private final float ROTATIONSPEED = 4.0f;
+    private BufferedImage bulletImg;
     private BufferedImage img;
     private boolean UpPressed;
     private boolean DownPressed;
     private boolean RightPressed;
     private boolean LeftPressed;
+    private boolean shootPressed;
 
 
-    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage img) {
+    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage img, BufferedImage bullet) {
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
         this.img = img;
         this.angle = angle;
-
+        this.bulletImg = bullet;
+        game = GameWorld.getGame();
     }
 
     void setX(int x){ this.x = x; }
 
     void setY(int y) { this. y = y;}
+
+    void shootingPressed() {
+        this.shootPressed = true;
+    }
 
     void toggleUpPressed() {
         this.UpPressed = true;
@@ -111,9 +118,6 @@ public class Tank implements GameObject{
         checkBorder();
     }
 
-
-
-
     private void checkBorder() {
         if (x < 30) {
             x = 30;
@@ -144,12 +148,22 @@ public class Tank implements GameObject{
         return 0;
     }
 
+    public void shoot(){
+        this.bulletCount++;
+        bullets.add(new Bullet(x, y, this.angle, bulletImg));
+    }
+
     @Override
-    public void render(Graphics g) {
+    public void render(Graphics2D g2d) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
         rotation.rotate(Math.toRadians(angle), this.img.getWidth() / 2.0, this.img.getHeight() / 2.0);
-        Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.img, rotation, null);
+        g2d.setColor(Color.red);
+        g2d.fillOval(this.x, this.y, 10, 10);
+
+        for (Bullet tempBullet : this.bullets){
+            tempBullet.render(g2d);
+        }
     }
 
 

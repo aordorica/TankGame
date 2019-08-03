@@ -28,8 +28,7 @@ public class BackgroundLandscape implements GameObject {
     }
 
     @Override
-    public void render(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    public void render(Graphics2D g2d) {
         g2d.drawImage(img,0, 0, width, height, null);
     }
 }

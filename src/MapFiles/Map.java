@@ -2,16 +2,14 @@ package MapFiles;
 
 import GameFiles.GameObject;
 import GameFiles.GameWorld;
-import GameFiles.Tank;
-
+import GameFiles.PowerUp;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
 public class Map implements GameObject {
-    public ArrayList<Wall> walls = new ArrayList<Wall>();
-    public ArrayList<Tank> tanks = new ArrayList<Tank>();
+    public ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
     public ArrayList<BreakableWall> breakableWalls = new ArrayList<BreakableWall>();
     public ArrayList<UnbreakableWall> unbreakableWalls = new ArrayList<UnbreakableWall>();
 
@@ -22,10 +20,6 @@ public class Map implements GameObject {
     private GameWorld game;
     private Graphics2D graphics2D;
 
-    // Buffered image objects
-    private BufferedImage breakableWall;
-    private BufferedImage unBreakableWall;
-
     public Map(String fileName, GameWorld game) {
         this.fileName = fileName;
         this.game = game;
@@ -34,23 +28,24 @@ public class Map implements GameObject {
 
     private void mapLoader(String file){
 
-        breakableWall = game.imageHashMap.get("BreakableWall");
-        unBreakableWall = game.imageHashMap.get("UnbreakableWall");
+        // Buffered image objects
+        BufferedImage breakableWall = game.imageHashMap.get("BreakableWall");
+        BufferedImage unBreakableWall = game.imageHashMap.get("UnbreakableWall");
+        BufferedImage powerUpImg = game.imageHashMap.get("PowerUp");
 
-        String s = null;
+        String s;
         fileName = file;
         char character;
 
         try {
             fileBuffer = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/" + fileName)));
-
             //Loop to print put map layout text file one line at a time
             while ((s=fileBuffer.readLine())!=null)
             {
                 //System.out.println(s);
                 for (int i = 0; i < s.length(); i++) {
                     character = s.charAt(i);
-                    System.out.println(character);
+                    //System.out.println(character);
                     switch(character) {
                         case '1':
                             unbreakableWalls.add(new UnbreakableWall(unBreakableWall, i*32, height*32));
@@ -59,6 +54,7 @@ public class Map implements GameObject {
                             breakableWalls.add(new BreakableWall(breakableWall, i*32, height*32));
                             break;
                         case '3':
+                            powerUps.add(new PowerUp(powerUpImg, i*32, height*32));
                             break;
                     }
                 }
@@ -73,22 +69,24 @@ public class Map implements GameObject {
 
     @Override
     public int getWidth() {
-        return 0;
+        return this.width;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return this.height;
     }
 
     @Override
-    public void render(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+    public void render(Graphics2D g2d) {
         for (BreakableWall temporaryWall : this.breakableWalls){
-            temporaryWall.render(g2);
+            temporaryWall.render(g2d);
         }
         for (UnbreakableWall tempWall : this.unbreakableWalls){
-            tempWall.render(g2);
+            tempWall.render(g2d);
+        }
+        for (PowerUp powerUp : this.powerUps){
+            powerUp.render(g2d);
         }
     }
 }
