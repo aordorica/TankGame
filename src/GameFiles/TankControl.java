@@ -17,6 +17,7 @@ public class TankControl implements KeyListener {
     private final int left;
     private final int shoot;
     private final int esc;
+    private int fireRate = 1000;
 
     public TankControl(Tank t1, int up, int down, int left, int right, int shoot, int esc) {
         this.t1 = t1;

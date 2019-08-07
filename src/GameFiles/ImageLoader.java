@@ -1,10 +1,8 @@
 package GameFiles;
 
-import GameFiles.Tank;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.Objects;
 
 public class ImageLoader {

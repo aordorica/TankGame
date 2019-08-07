@@ -1,28 +1,32 @@
 package MapFiles;
 
-import GameFiles.GameObject;
-import GameFiles.GameWorld;
-import GameFiles.PowerUp;
+import GameFiles.*;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Map implements GameObject {
-    public ArrayList<PowerUp> powerUps = new ArrayList<PowerUp>();
-    public ArrayList<BreakableWall> breakableWalls = new ArrayList<BreakableWall>();
-    public ArrayList<UnbreakableWall> unbreakableWalls = new ArrayList<UnbreakableWall>();
+public class Map implements GameObject, Collidable {
+    private ArrayList<PowerUp> powerUps = new ArrayList<>();
+    private ArrayList<BreakableWall> breakableWalls = new ArrayList<>();
+    private ArrayList<UnbreakableWall> unbreakableWalls = new ArrayList<>();
 
     private int width = 0;
     private int height = 0;
+    private int x;
+    private int y;
     private String fileName;
     private BufferedReader fileBuffer;
     private GameWorld game;
-    private Graphics2D graphics2D;
+    private BackgroundLandscape background;
+    private Rectangle hitBox;
 
     public Map(String fileName, GameWorld game) {
         this.fileName = fileName;
         this.game = game;
+        this.x = 0;
+        this.y = 0;
         mapLoader(fileName);
     }
 
@@ -32,6 +36,8 @@ public class Map implements GameObject {
         BufferedImage breakableWall = game.imageHashMap.get("BreakableWall");
         BufferedImage unBreakableWall = game.imageHashMap.get("UnbreakableWall");
         BufferedImage powerUpImg = game.imageHashMap.get("PowerUp");
+        BufferedImage bg = game.imageHashMap.get("Background");
+        background = new BackgroundLandscape(GameConstants.GAME_SCREEN_WIDTH, GameConstants.GAME_SCREEN_HEIGHT, bg);
 
         String s;
         fileName = file;
@@ -78,9 +84,55 @@ public class Map implements GameObject {
     }
 
     @Override
+    public double getHealth() {
+        return 0;
+    }
+
+    @Override
+    public Boolean checkHealth() {
+        return null;
+    }
+
+    @Override
+    public void takeHit() {
+
+    }
+
+    @Override
+    public Rectangle getHitBox() {
+        hitBox = new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
+        return this.hitBox;
+    }
+
+    @Override
+    public Boolean checkCollision(Collidable enemy) {
+        return null;
+    }
+
+    @Override
+    public void collision(Collidable enemy) {
+
+    }
+
+    public ArrayList<PowerUp> getPowerUps() {
+        return powerUps;
+    }
+
+    public ArrayList<BreakableWall> getBreakableWalls() {
+        return breakableWalls;
+    }
+
+    public ArrayList<UnbreakableWall> getUnbreakableWalls() {
+        return unbreakableWalls;
+    }
+
+    @Override
     public void render(Graphics2D g2d) {
+
+        this.background.render(g2d);
+
         for (BreakableWall temporaryWall : this.breakableWalls){
-            temporaryWall.render(g2d);
+            temporaryWall.render(g2d, null);
         }
         for (UnbreakableWall tempWall : this.unbreakableWalls){
             tempWall.render(g2d);
@@ -89,4 +141,5 @@ public class Map implements GameObject {
             powerUp.render(g2d);
         }
     }
+
 }

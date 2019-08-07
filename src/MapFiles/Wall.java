@@ -13,6 +13,7 @@ public abstract class Wall implements GameObject {
     private int height;
     private int locateX = 0;
     private int locateY = 0;
+    private boolean visible;
 
     @Override
     public int getWidth() {
@@ -33,12 +34,5 @@ public abstract class Wall implements GameObject {
     public void render(Graphics2D g2d) {
         g2d.drawImage(image, locateX, locateY, width, height, null);
     }
-
-    public void collision(){
-        if(isbreakable){
-            //getting shot code herd
-        }
-    }
-
 
 }
