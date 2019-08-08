@@ -2,7 +2,10 @@ package GameFiles;
 
 import MapFiles.BreakableWall;
 import MapFiles.UnbreakableWall;
+import MapFiles.Wall;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -11,11 +14,14 @@ import java.util.ArrayList;
 public class Tank implements Collidable, GameObject{
 
     private ArrayList<Bullet> bullets = new ArrayList<>();
+    private JFrame frame;
+
     private int x;
     private int y;
     private int vx;
     private int vy;
     private int health;
+    private int fullHealth;
     private int lives;
     private float angle;
     private Rectangle hitBox;
@@ -35,7 +41,7 @@ public class Tank implements Collidable, GameObject{
     private boolean shot;
 
 
-    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage tankImg, BufferedImage bullet, BufferedImage explosionImg) {
+    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage tankImg, BufferedImage bullet, BufferedImage explosionImg, JFrame frame) {
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -45,12 +51,10 @@ public class Tank implements Collidable, GameObject{
         this.bulletImg = bullet;
         this.explosionImg = explosionImg;
         this.health = Collidable.health;
+        this.fullHealth = Collidable.health;
         this.lives = Collidable.lives;
+        this.frame = frame;
     }
-
-    void setX(int x){ this.x = x; }
-
-    void setY(int y) { this. y = y;}
 
     void toggleUpPressed() {
         this.UpPressed = true;
@@ -156,9 +160,6 @@ public class Tank implements Collidable, GameObject{
         return this.tankImg.getHeight();
     }
 
-    public ArrayList<Bullet> getBullets() {
-        return bullets;
-    }
 
     public void shoot(){
         if(bullets.isEmpty()) {
@@ -170,26 +171,20 @@ public class Tank implements Collidable, GameObject{
         }
     }
 
-    public void explosion(Graphics2D g2d) {
-        final int explosionWidth = explosionImg.getWidth() / 13;
-        final int explosionHeight = 196;
-        int explCol = 13;
-
-        sheet = new SpriteSheet(explosionImg);
-        for (int i = 0; i < explCol; i++) {
-            g2d.drawImage(sheet.crop(i * explosionWidth, explosionHeight, explosionWidth, explosionHeight),
-                    this.x,
-                    this.y,
-                    null);
-        }
-    }
 
     @Override
     public Boolean checkCollision(Collidable enemy) {
         if (this.getHitBox() != null) {
             if (this.hitBox.intersects(enemy.getHitBox())) {
                 collision(enemy);
-                return true;
+            }
+            if (!this.bullets.isEmpty()) {
+                for (int i = 0; i < bullets.size(); i++) {
+                    if (bullets.get(i).getHitBox().intersects(enemy.getHitBox())) {
+                        enemy.takeHit();
+                        bullets.remove(i);
+                    }
+                }
             }
         }
         return false;
@@ -198,24 +193,19 @@ public class Tank implements Collidable, GameObject{
     @Override
     public void collision(Collidable enemy) {
         Rectangle rect = enemy.getHitBox().intersection(this.hitBox);
-        if (enemy instanceof Bullet) {
-            System.out.println("Collided with a Bullet");
+
+        if (enemy instanceof Tank) {
+            bounceBack(rect);
+            //Take damage if two tanks hit each other
             this.health--;
-            enemy.checkCollision(this);
-            //explosion(graphics2D);
-            checkHealth();
-        } else if (enemy instanceof Tank) {
-            bounceBack(enemy, rect);
-        } else if (enemy instanceof BreakableWall) {
-            bounceBack(enemy, rect);
-        } else if (enemy instanceof UnbreakableWall) {
-            bounceBack(enemy, rect);
+        } else if (enemy instanceof Wall) {
+            bounceBack(rect);
         } else if (enemy instanceof PowerUp) {
-            //powerup code here
+            this.health = fullHealth;
         }
     }
 
-    public void bounceBack(Collidable enemy, Rectangle intersection) {
+    public void bounceBack(Rectangle intersection) {
 
         // Hit from the LEFT
         if (this.x < intersection.x) {
@@ -257,23 +247,13 @@ public class Tank implements Collidable, GameObject{
 
     @Override
     public Boolean checkHealth() {
-        if (this.health <= 0) {
-            this.setLives(false);
-        } else
-            this.setLives(true);
-        return true;
+        this.health = fullHealth;
+        return null;
     }
 
     @Override
     public void takeHit() {
-
-    }
-
-    public void setLives(Boolean state) {
-        if (!state) {
-            this.lives--;
-        }
-
+        this.health--;
     }
 
     @Override
@@ -282,17 +262,17 @@ public class Tank implements Collidable, GameObject{
         return this.hitBox;
     }
 
-    private void setGraphics(Graphics2D g2d) {
-        this.graphics2D = g2d;
-    }
-
     @Override
     public void render(Graphics2D g2d) {
-
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
         rotation.rotate(Math.toRadians(angle), this.tankImg.getWidth() / 2.0, this.tankImg.getHeight() / 2.0);
         g2d.drawImage(this.tankImg, rotation, null);
-        g2d.draw(this.hitBox);
+
+        //Show hitbox if GameConstants method is TRUE
+        if (this.showHitbox) {
+            g2d.draw(this.hitBox);
+        }
+
         g2d.setColor(Color.red);
         g2d.fillOval(this.x, this.y, 10, 10);
 
@@ -302,14 +282,21 @@ public class Tank implements Collidable, GameObject{
         }
 
         g2d.setColor(Color.CYAN);
-        g2d.drawRect(this.x, this.y+this.getHeight(), this.getWidth(), 5);
-        g2d.setColor(Color.red);
-        g2d.fillRect(this.x, this.y + this.getWidth(), this.getWidth()-8, 5);
+        g2d.drawRect(this.x, this.y+this.getHeight(), this.getWidth(), 7);
 
-        g2d.setColor(Color.red);
-        for (int i = 0; i < this.health; i++) {
-            g2d.fillRect(GameConstants.GAME_SCREEN_WIDTH / 2 + (i*50), GameConstants.GAME_SCREEN_HEIGHT + 50, 28, 38);
-        }
-        setGraphics(g2d);
+        //Draw Lives
+
+
+        //Draw Health Bar
+        int barLength = this.getWidth() / fullHealth;
+        int bar = barLength * this.health;
+        if (this.health >= this.fullHealth) {
+            g2d.setColor(Color.GREEN);
+        } else if (this.health > fullHealth / 4) {
+            g2d.setColor(Color.YELLOW);
+        } else
+            g2d.setColor(Color.red);
+        g2d.fillRect(this.x, this.y+this.getHeight(), bar, 7);
+
     }
 }

@@ -39,12 +39,12 @@ public class PowerUp implements GameObject, Collidable {
 
     @Override
     public Boolean checkHealth() {
-        return null;
+        return true;
     }
 
     @Override
     public void takeHit() {
-
+        //Do nothing
     }
 
     @Override
@@ -55,6 +55,7 @@ public class PowerUp implements GameObject, Collidable {
 
     @Override
     public Boolean checkCollision(Collidable enemy) {
+        Tank tank = (Tank) enemy;
         return null;
     }
 

@@ -23,6 +23,8 @@ public class GameWorld extends JComponent implements Runnable{
     private Map map;
     private Tank tank1;
     private Tank tank2;
+    private Camera cam1;
+    private Camera cam2;
     private BufferedImage tank1Img;
     private BufferedImage tank2Img;
     private BufferedImage bulletImg;
@@ -77,26 +79,28 @@ public class GameWorld extends JComponent implements Runnable{
 
         /* Class instances to create Map, Background and tank objects. Each is passed the game Images and game screen size*/
         map = new Map("mapLayout.txt", game);
-        tank1 = new Tank(200, 200, 0, 0, 0, tank1Img, bulletImg, explosionImg);
-        tank2 = new Tank(1000, 200, 0, 0, 180, tank2Img, bulletImg, explosionImg);
+        tank1 = new Tank(200, 200, 0, 0, 0, tank1Img, bulletImg, explosionImg, frame);
+        tank2 = new Tank(1000, 200, 0, 0, 180, tank2Img, bulletImg, explosionImg, frame);
 
+        cam1 = new Camera(tank1, map);
+        cam2 = new Camera(tank2, map);
 
         TankControl tank1Control = new TankControl(tank1, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_ENTER, KeyEvent.VK_ESCAPE);
-        TankControl tank2Control = new TankControl(tank2, KeyEvent.VK_E, KeyEvent.VK_D, KeyEvent.VK_S, KeyEvent.VK_F, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE);
+        TankControl tank2Control = new TankControl(tank2, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_SPACE, KeyEvent.VK_ESCAPE);
 
         addKeyListener(tank1Control);
         addKeyListener(tank2Control);
     }
 
     private void loadImages() {
-        imageHashMap.put("tank1", ImageLoader.loadImages("tank1.png"));
-        imageHashMap.put("tank2", ImageLoader.loadImages("tank2.png"));
+        imageHashMap.put("tank1", ImageLoader.loadImages("StarFighter1.png"));
+        imageHashMap.put("tank2", ImageLoader.loadImages("StarFighter2.png"));
         imageHashMap.put("Background", ImageLoader.loadImages("Spacebg.jpg"));
         imageHashMap.put("Missile", ImageLoader.loadImages("bullet.png"));
         imageHashMap.put("BreakableWall", ImageLoader.loadImages("Wall1.gif"));
         imageHashMap.put("UnbreakableWall", ImageLoader.loadImages("Wall2.gif"));
         imageHashMap.put("PowerUp", ImageLoader.loadImages("powerup.png"));
-        imageHashMap.put("Explosion", ImageLoader.loadImages("explosion1.png"));
+        imageHashMap.put("Explosion", ImageLoader.loadImages("explosion2.gif"));
     }
 
     @Override
@@ -121,34 +125,16 @@ public class GameWorld extends JComponent implements Runnable{
         g2.dispose();
     }
 
-    private void checkCollidingWalls(Tank tank){
-        ArrayList<BreakableWall> breakableWalls = map.getBreakableWalls();
-        ArrayList<UnbreakableWall> unBreakableWalls = map.getUnbreakableWalls();
-        ArrayList<PowerUp> powerUps = map.getPowerUps();
-        ArrayList<Bullet> bullets = tank.getBullets();
-
-        for (BreakableWall tempWall: breakableWalls) {
-            tank.checkCollision(tempWall);
-        }
-        for (UnbreakableWall tempWall: unBreakableWalls) {
-            tank.checkCollision(tempWall);
-        }
-        for (PowerUp powerUp: powerUps) {
-            tank.checkCollision(powerUp);
-        }
-        for (Bullet bullet: bullets) {
-            bullet.checkCollision(tank);
-        }
-    }
-
     private void update() {
 
         tank1.update();
         tank2.update();
 
+        //checkCollisions(tank1, tank2);
         tank1.checkCollision(tank2);
         tank2.checkCollision(tank1);
-        checkCollidingWalls(tank1);
-        checkCollidingWalls(tank2);
+
+        map.checkCollision(tank1);
+        map.checkCollision(tank2);
     }
 }

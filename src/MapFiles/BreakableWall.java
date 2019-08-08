@@ -12,11 +12,9 @@ public class BreakableWall extends Wall implements Collidable {
     private int locateY;
     private int health = 10;
     private int spawnTime = 100;
-    private boolean visible;
     private Rectangle hitBox;
 
     public BreakableWall(BufferedImage img, int x, int y) {
-        this.visible = true;
         this.isbreakable = true;
         this.locateX = x;
         this.locateY = y;
@@ -34,11 +32,6 @@ public class BreakableWall extends Wall implements Collidable {
         return image.getHeight();
     }
 
-    private void setLocation(int x, int y){
-        this.locateX = x;
-        this.locateY = y;
-    }
-
     @Override
     public double getHealth() {
         return 0;
@@ -47,16 +40,14 @@ public class BreakableWall extends Wall implements Collidable {
     @Override
     public Boolean checkHealth() {
         if (this.health > 0) {
-            this.visible = true;
             return true;
         } else
-            this.visible = false;
             return false;
     }
 
     @Override
     public void takeHit() {
-        // Code to decrease health when hit
+        health--;
     }
 
     @Override
@@ -79,10 +70,12 @@ public class BreakableWall extends Wall implements Collidable {
         System.out.println("Collided with Breakable Wall");
     }
 
-    public void render(Graphics2D g2d, ImageObserver observer) {
+    public void render(Graphics2D g2d) {
         checkHealth();
-        if (visible) {
-            g2d.drawImage(image, locateX, locateY, observer);
+        g2d.drawImage(image, locateX, locateY, null);
+
+        // Show hitbox
+        if (this.showHitbox) {
             g2d.draw(this.hitBox);
         }
     }

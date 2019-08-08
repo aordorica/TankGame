@@ -36,7 +36,7 @@ public class UnbreakableWall extends Wall implements Collidable{
 
     @Override
     public Boolean checkHealth() {
-        return null;
+        return true;
     }
 
     @Override
@@ -65,37 +65,12 @@ public class UnbreakableWall extends Wall implements Collidable{
         System.out.println("Collided with UnBreakable Wall");
     }
 
-    public void bounceBack(Collidable enemy, Rectangle intersection) {
-        // Hit from the LEFT
-        if (this.locateX < intersection.x) {
-            if (this.getWidth() < intersection.width) {
-                this.locateX = this.locateX - intersection.width;
-            }
-        }
-        // Hit from the RIGHT
-        if (this.locateX < intersection.y) {
-            if (this.getWidth() < intersection.width) {
-                this.locateX = this.locateX + intersection.width;
-            }
-        }
-
-        // Hit from the TOP
-        if (this.locateY < intersection.y) {
-            if (this.getWidth() > intersection.width) {
-                this.locateY = this.locateY - intersection.height;
-            }
-        }
-
-        // Hit from BOTTOM
-        if (intersection.height > intersection.width) {
-            if (this.locateY > intersection.y) {
-                this.locateY = this.locateY + intersection.height;
-            }
-        }
-    }
-
     public void render(Graphics2D g2d) {
         g2d.drawImage(image, locateX, locateY, null);
-        g2d.draw(this.hitBox);
+
+        // Show hitbox
+        if (this.showHitbox) {
+            g2d.draw(this.hitBox);
+        }
     }
 }

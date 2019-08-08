@@ -73,7 +73,8 @@ public class Bullet implements GameObject, Collidable {
     public Boolean checkCollision(Collidable enemy) {
         if (this.hitBox != null && enemy.getHitBox() != null) {
             if (this.hitBox.intersects(enemy.getHitBox())){
-                this.visible = false;
+                this.collision(enemy);
+                this.visible = true;
                 this.explode = true;
             }
         } return false;
@@ -84,25 +85,6 @@ public class Bullet implements GameObject, Collidable {
        System.out.println("Collided with a Bullet");
     }
 
-    private void explosion(Graphics2D g2d) {
-        final int explosionWidth = 196;
-        final int explosionHeight = 196;
-        int explCol = 13;
-
-        sheet = new SpriteSheet(explosionImg);
-
-//        g2d.drawImage(sheet.crop(0, 0, explosionWidth, explosionHeight),
-//                this.bx,
-//                this.by,
-//                null);
-//        for (int i = 0; i < explCol; i++) {
-//            g2d.drawImage(sheet.crop(i * explosionWidth, explosionHeight, explosionWidth, explosionHeight),
-//                    this.bx,
-//                    this.by,
-//                    null);
-//        }
-    }
-
     @Override
     public void render(Graphics2D g2d) {
         if (visible) {
@@ -111,12 +93,11 @@ public class Bullet implements GameObject, Collidable {
             rotation.rotate(Math.toRadians(angle), this.bulletImg.getWidth(), this.bulletImg.getHeight());
             g2d.drawImage(bulletImg, rotation, null);
             g2d.setColor(Color.cyan);
-            g2d.draw(hitBox);
-        }
 
-        if (explode) {
-            //g2d.drawImage(explosionImg.getSubimage(0,0,196,196), this.bx, this.by, null);
-            //explosion(g2d);
+            // Show hitbox
+            if (this.showHitbox) {
+                g2d.draw(this.hitBox);
+            }
         }
     }
 }

@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 public class Map implements GameObject, Collidable {
     private ArrayList<PowerUp> powerUps = new ArrayList<>();
-    private ArrayList<BreakableWall> breakableWalls = new ArrayList<>();
-    private ArrayList<UnbreakableWall> unbreakableWalls = new ArrayList<>();
+    private ArrayList<Wall> walls = new ArrayList<>();
 
     private int width = 0;
     private int height = 0;
@@ -54,10 +53,10 @@ public class Map implements GameObject, Collidable {
                     //System.out.println(character);
                     switch(character) {
                         case '1':
-                            unbreakableWalls.add(new UnbreakableWall(unBreakableWall, i*32, height*32));
+                            walls.add(new UnbreakableWall(unBreakableWall, i*32, height*32));
                             break;
                         case '2':
-                            breakableWalls.add(new BreakableWall(breakableWall, i*32, height*32));
+                            walls.add(new BreakableWall(breakableWall, i*32, height*32));
                             break;
                         case '3':
                             powerUps.add(new PowerUp(powerUpImg, i*32, height*32));
@@ -106,6 +105,19 @@ public class Map implements GameObject, Collidable {
 
     @Override
     public Boolean checkCollision(Collidable enemy) {
+
+        Tank tank = (Tank ) enemy;
+
+        for (int i = 0; i < walls.size(); i++) {
+            tank.checkCollision((Collidable) walls.get(i));
+            if (!((Collidable) walls.get(i)).checkHealth()) {
+                walls.remove(i);
+            }
+        }
+
+        for (int i = 0; i < powerUps.size(); i++) {
+            tank.checkCollision(powerUps.get(i));
+        }
         return null;
     }
 
@@ -114,28 +126,13 @@ public class Map implements GameObject, Collidable {
 
     }
 
-    public ArrayList<PowerUp> getPowerUps() {
-        return powerUps;
-    }
-
-    public ArrayList<BreakableWall> getBreakableWalls() {
-        return breakableWalls;
-    }
-
-    public ArrayList<UnbreakableWall> getUnbreakableWalls() {
-        return unbreakableWalls;
-    }
-
     @Override
     public void render(Graphics2D g2d) {
 
         this.background.render(g2d);
 
-        for (BreakableWall temporaryWall : this.breakableWalls){
-            temporaryWall.render(g2d, null);
-        }
-        for (UnbreakableWall tempWall : this.unbreakableWalls){
-            tempWall.render(g2d);
+        for (Wall wall : this.walls){
+            wall.render(g2d);
         }
         for (PowerUp powerUp : this.powerUps){
             powerUp.render(g2d);
