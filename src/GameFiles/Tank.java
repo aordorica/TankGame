@@ -15,7 +15,6 @@ public class Tank implements Collidable, GameObject{
 
     private ArrayList<Bullet> bullets = new ArrayList<>();
     private JFrame frame;
-
     private int x;
     private int y;
     private int vx;
@@ -25,8 +24,6 @@ public class Tank implements Collidable, GameObject{
     private int lives;
     private float angle;
     private Rectangle hitBox;
-    private SpriteSheet sheet;
-    private Graphics2D graphics2D;
 
     private final int R = 2;
     private final float ROTATIONSPEED = 4.0f;
@@ -150,16 +147,6 @@ public class Tank implements Collidable, GameObject{
         return "x=" + x + ", y=" + y + ", angle=" + angle;
     }
 
-    @Override
-    public int getWidth() {
-        return this.tankImg.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return this.tankImg.getHeight();
-    }
-
 
     public void shoot(){
         if(bullets.isEmpty()) {
@@ -170,7 +157,6 @@ public class Tank implements Collidable, GameObject{
             shot = true;
         }
     }
-
 
     @Override
     public Boolean checkCollision(Collidable enemy) {
@@ -211,14 +197,14 @@ public class Tank implements Collidable, GameObject{
         if (this.x < intersection.x) {
             if (intersection.width < intersection.height) {
                 this.x = this.x - intersection.width;
-                System.out.println("Collided from the LEFT");
+                //System.out.println("Collided from the LEFT");
             }
         }
         // Hit from the RIGHT
         if (this.x >= intersection.x) {
             if (intersection.width < intersection.height) {
                 this.x = this.x + intersection.width;
-                System.out.println("Collided from the RIGHT");
+                //System.out.println("Collided from the RIGHT");
             }
         }
 
@@ -226,7 +212,7 @@ public class Tank implements Collidable, GameObject{
         if (this.y < intersection.y) {
             if (intersection.width > intersection.height) {
                 this.y = this.y - intersection.height;
-                System.out.println("Collided from the TOP");
+                //System.out.println("Collided from the TOP");
             }
         }
 
@@ -234,15 +220,10 @@ public class Tank implements Collidable, GameObject{
         if (this.y >= intersection.y) {
             if (intersection.width > intersection.height) {
                 this.y = this.y + intersection.height;
-                System.out.println("Collided from the BOTTOM");
+                //System.out.println("Collided from the BOTTOM");
             }
         }
 
-    }
-
-    @Override
-    public double getHealth() {
-        return this.health;
     }
 
     @Override
@@ -263,6 +244,29 @@ public class Tank implements Collidable, GameObject{
     }
 
     @Override
+    public double getHealth() {
+        return this.health;
+    }
+
+    @Override
+    public int getWidth() {
+        return this.tankImg.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return this.tankImg.getHeight();
+    }
+
+    public int getX () {
+        return this.x;
+    }
+
+    public int getY () {
+        return this.y;
+    }
+
+    @Override
     public void render(Graphics2D g2d) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
         rotation.rotate(Math.toRadians(angle), this.tankImg.getWidth() / 2.0, this.tankImg.getHeight() / 2.0);
@@ -272,10 +276,6 @@ public class Tank implements Collidable, GameObject{
         if (this.showHitbox) {
             g2d.draw(this.hitBox);
         }
-
-        g2d.setColor(Color.red);
-        g2d.fillOval(this.x, this.y, 10, 10);
-
         for (Bullet tempBullet : this.bullets){
             if(readyToFire)
                 tempBullet.render(g2d);

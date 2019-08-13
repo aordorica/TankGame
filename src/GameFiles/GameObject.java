@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public interface GameObject {
     BufferedImage img = null;
-    Boolean showHitbox = true;
+    Boolean showHitbox = false;
 
     int getWidth();
 

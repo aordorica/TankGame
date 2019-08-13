@@ -29,6 +29,10 @@ public class PowerUp implements GameObject, Collidable {
 
     @Override
     public void render(Graphics2D g2d) {
+        if (this.showHitbox) {
+            g2d.setColor(Color.GREEN);
+            g2d.draw(this.hitBox);
+        }
         g2d.drawImage(image, locateX, locateY, null);
     }
 

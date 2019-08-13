@@ -1,5 +1,6 @@
 package MapFiles;
 
+import GameFiles.GameConstants;
 import GameFiles.GameObject;
 
 import java.awt.*;
@@ -31,4 +32,5 @@ public class BackgroundLandscape implements GameObject {
     public void render(Graphics2D g2d) {
         g2d.drawImage(img,0, 0, width, height, null);
     }
+
 }

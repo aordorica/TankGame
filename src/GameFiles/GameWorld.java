@@ -29,6 +29,9 @@ public class GameWorld extends JComponent implements Runnable{
     private BufferedImage tank2Img;
     private BufferedImage bulletImg;
     private BufferedImage explosionImg;
+    private BufferedImage screenImage;
+    private BufferedImage miniMap;
+    private BufferedImage bg;
 
     public HashMap<String, BufferedImage> imageHashMap;
 
@@ -76,9 +79,10 @@ public class GameWorld extends JComponent implements Runnable{
         tank2Img = game.imageHashMap.get("tank2");
         bulletImg = game.imageHashMap.get("Missile");
         explosionImg = game.imageHashMap.get("Explosion");
+        bg = imageHashMap.get("Background");
 
         /* Class instances to create Map, Background and tank objects. Each is passed the game Images and game screen size*/
-        map = new Map("mapLayout.txt", game);
+        map = new Map("map1.txt", game);
         tank1 = new Tank(200, 200, 0, 0, 0, tank1Img, bulletImg, explosionImg, frame);
         tank2 = new Tank(1000, 200, 0, 0, 180, tank2Img, bulletImg, explosionImg, frame);
 
@@ -95,12 +99,13 @@ public class GameWorld extends JComponent implements Runnable{
     private void loadImages() {
         imageHashMap.put("tank1", ImageLoader.loadImages("StarFighter1.png"));
         imageHashMap.put("tank2", ImageLoader.loadImages("StarFighter2.png"));
-        imageHashMap.put("Background", ImageLoader.loadImages("Spacebg.jpg"));
+        imageHashMap.put("Background", ImageLoader.loadImages("StarWarsBG.png"));
         imageHashMap.put("Missile", ImageLoader.loadImages("bullet.png"));
-        imageHashMap.put("BreakableWall", ImageLoader.loadImages("Wall1.gif"));
-        imageHashMap.put("UnbreakableWall", ImageLoader.loadImages("Wall2.gif"));
+        imageHashMap.put("BreakableWall", ImageLoader.loadImages("rock.png"));
+        imageHashMap.put("UnbreakableWall", ImageLoader.loadImages("asteroid.png"));
         imageHashMap.put("PowerUp", ImageLoader.loadImages("powerup.png"));
         imageHashMap.put("Explosion", ImageLoader.loadImages("explosion2.gif"));
+        imageHashMap.put("GameOver", ImageLoader.loadImages("gameOver.png"));
     }
 
     @Override
@@ -119,16 +124,50 @@ public class GameWorld extends JComponent implements Runnable{
 
     public void paint(Graphics graphics){
         Graphics2D g2 = (Graphics2D) graphics;
-        this.map.render(g2);
-        this.tank1.render(g2);
-        this.tank2.render(g2);
-        g2.dispose();
+
+        float minWidth = map.getWidth() * 32;
+        float minHeight = map.getHeight() * 32;
+
+        screenImage = (BufferedImage) createImage(map.getWidth() * 32, map.getHeight() * 32);
+        miniMap = screenImage.getSubimage(width /2 - 180, height /2, width / 2, height/2);
+
+        Graphics2D side1 = screenImage.getSubimage(0, 0, width /2, height).createGraphics();
+        Graphics2D side2 = screenImage.getSubimage(width / 2, 0, width/2, height).createGraphics();
+
+
+        //this.map.render(g2);
+        this.cam1.render(side1, tank2);
+        this.cam2.render(side2, tank1);
+
+        //Create Mini Map
+        Graphics2D minMap = miniMap.createGraphics();
+
+        minMap.scale(400/minWidth, 400/minHeight);
+        minMap.drawImage(bg, 0,0,map.getWidth() * 32, map.getHeight() * 32, null);
+        map.render(minMap);
+        tank1.render(minMap);
+        tank2.render(minMap);
+        minMap.setColor(Color.cyan);
+        minMap.drawRect(0,0,map.getWidth() * 32,map.getHeight() * 32);
+        g2.drawImage(screenImage, 0,0,null);
+
+    }
+
+    private void gameOver() {
+        Graphics2D endGraphics = (Graphics2D) getGraphics();
+        endGraphics.drawImage(imageHashMap.get("GameOver"), 0, 0, null);
     }
 
     private void update() {
 
+        if (tank1.getHealth() == 0 || tank2.getHealth() == 0) {
+            this.stop();
+            gameOver();
+        }
         tank1.update();
         tank2.update();
+        cam1.update();
+        cam2.update();
 
         //checkCollisions(tank1, tank2);
         tank1.checkCollision(tank2);

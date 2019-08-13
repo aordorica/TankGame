@@ -44,6 +44,7 @@ public class Map implements GameObject, Collidable {
 
         try {
             fileBuffer = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/" + fileName)));
+            this.width = fileBuffer.readLine().length();
             //Loop to print put map layout text file one line at a time
             while ((s=fileBuffer.readLine())!=null)
             {
@@ -129,7 +130,7 @@ public class Map implements GameObject, Collidable {
     @Override
     public void render(Graphics2D g2d) {
 
-        this.background.render(g2d);
+        //this.background.render(g2d);
 
         for (Wall wall : this.walls){
             wall.render(g2d);
@@ -137,6 +138,10 @@ public class Map implements GameObject, Collidable {
         for (PowerUp powerUp : this.powerUps){
             powerUp.render(g2d);
         }
+    }
+
+    public void renderBackground(Graphics2D graphics2D) {
+        background.render(graphics2D);
     }
 
 }
