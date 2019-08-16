@@ -1,11 +1,8 @@
 package GameFiles;
 
-import MapFiles.BreakableWall;
-import MapFiles.UnbreakableWall;
+import MapFiles.Map;
 import MapFiles.Wall;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -14,7 +11,6 @@ import java.util.ArrayList;
 public class Tank implements Collidable, GameObject{
 
     private ArrayList<Bullet> bullets = new ArrayList<>();
-    private JFrame frame;
     private int x;
     private int y;
     private int vx;
@@ -22,6 +18,8 @@ public class Tank implements Collidable, GameObject{
     private int health;
     private int fullHealth;
     private int lives;
+    private int boundWidth;
+    private int boundHeight;
     private float angle;
     private Rectangle hitBox;
 
@@ -35,10 +33,9 @@ public class Tank implements Collidable, GameObject{
     private boolean RightPressed;
     private boolean LeftPressed;
     private boolean readyToFire;
-    private boolean shot;
 
 
-    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage tankImg, BufferedImage bullet, BufferedImage explosionImg, JFrame frame) {
+    public Tank(int x, int y, int vx, int vy, int angle, BufferedImage tankImg, BufferedImage bullet, BufferedImage explosionImg, Map map) {
         this.x = x;
         this.y = y;
         this.vx = vx;
@@ -50,7 +47,8 @@ public class Tank implements Collidable, GameObject{
         this.health = Collidable.health;
         this.fullHealth = Collidable.health;
         this.lives = Collidable.lives;
-        this.frame = frame;
+        this.boundWidth = map.getWidth() * 32;
+        this.boundHeight = map.getHeight() * 32;
     }
 
     void toggleUpPressed() {
@@ -103,12 +101,10 @@ public class Tank implements Collidable, GameObject{
 
     private void rotateLeft() {
         this.angle -= this.ROTATIONSPEED;
-        //System.out.println(this);
     }
 
     private void rotateRight() {
         this.angle += this.ROTATIONSPEED;
-        //System.out.println(this);
     }
 
     private void moveBackwards() {
@@ -131,14 +127,14 @@ public class Tank implements Collidable, GameObject{
         if (x < 30) {
             x = 30;
         }
-        if (x >= GameConstants.GAME_SCREEN_WIDTH - 88) {
-            x = GameConstants.GAME_SCREEN_WIDTH - 88;
+        if (x >= boundWidth - 88) {
+            x = boundWidth - 88;
         }
         if (y < 40) {
             y = 40;
         }
-        if (y >= GameConstants.GAME_SCREEN_HEIGHT - 80) {
-            y = GameConstants.GAME_SCREEN_HEIGHT - 80;
+        if (y >= boundHeight - 80) {
+            y = boundHeight - 80;
         }
     }
 
@@ -148,13 +144,12 @@ public class Tank implements Collidable, GameObject{
     }
 
 
-    public void shoot(){
+    void shoot(){
         if(bullets.isEmpty()) {
             readyToFire = true;
         }
         if(readyToFire) {
             bullets.add(new Bullet(bulletImg, explosionImg, x + tankImg.getWidth() + 10, y + tankImg.getHeight()/2, this.angle));
-            shot = true;
         }
     }
 
@@ -188,10 +183,11 @@ public class Tank implements Collidable, GameObject{
             bounceBack(rect);
         } else if (enemy instanceof PowerUp) {
             this.health = fullHealth;
+            enemy.checkCollision(this);
         }
     }
 
-    public void bounceBack(Rectangle intersection) {
+    private void bounceBack(Rectangle intersection) {
 
         // Hit from the LEFT
         if (this.x < intersection.x) {

@@ -36,7 +36,7 @@ public class Map implements GameObject, Collidable {
         BufferedImage unBreakableWall = game.imageHashMap.get("UnbreakableWall");
         BufferedImage powerUpImg = game.imageHashMap.get("PowerUp");
         BufferedImage bg = game.imageHashMap.get("Background");
-        background = new BackgroundLandscape(GameConstants.GAME_SCREEN_WIDTH, GameConstants.GAME_SCREEN_HEIGHT, bg);
+        //background = new BackgroundLandscape(GameConstants.GAME_SCREEN_WIDTH, GameConstants.GAME_SCREEN_HEIGHT, bg);
 
         String s;
         fileName = file;
@@ -71,6 +71,7 @@ public class Map implements GameObject, Collidable {
             System.out.println("Image File not found!");
             e.printStackTrace();
         }
+        background = new BackgroundLandscape(width * 32, height * 32, bg);
     }
 
     @Override
@@ -129,8 +130,6 @@ public class Map implements GameObject, Collidable {
 
     @Override
     public void render(Graphics2D g2d) {
-
-        //this.background.render(g2d);
 
         for (Wall wall : this.walls){
             wall.render(g2d);

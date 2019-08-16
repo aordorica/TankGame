@@ -6,7 +6,9 @@ import java.awt.image.BufferedImage;
 
 public class Bullet implements GameObject, Collidable {
 
-    private static final int B = 4;
+
+    public static int thisThing;
+    private static final int B = GameConstants.BULLET_SPEED;
     private int bx;
     private int by;
     private float angle;
