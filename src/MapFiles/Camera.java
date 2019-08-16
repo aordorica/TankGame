@@ -34,7 +34,6 @@ public class Camera {
         //System.out.println("Width: " + width + " height: " + height);
         if (tank.getX() <= width/4) {
             this.x = 0;
-            System.out.println("X set to 0\n");
         } else if (tank.getX() >= width*2) {
             this.x = width*-2;
         } else this.x = tank.getX() * -1 + (width / 4);

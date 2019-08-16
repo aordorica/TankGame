@@ -231,6 +231,11 @@ public class Tank implements Collidable, GameObject{
     @Override
     public void takeHit() {
         this.health--;
+        if (this.health == 0) {
+            this.lives--;
+            this.health = fullHealth;
+            System.out.println("Lives: " + this.lives);
+        }
     }
 
     @Override
@@ -262,6 +267,10 @@ public class Tank implements Collidable, GameObject{
         return this.y;
     }
 
+    Boolean checkDeath() {
+        return this.lives == 0;
+    }
+
     @Override
     public void render(Graphics2D g2d) {
         AffineTransform rotation = AffineTransform.getTranslateInstance(x, y);
@@ -277,10 +286,19 @@ public class Tank implements Collidable, GameObject{
                 tempBullet.render(g2d);
         }
 
+        //HealthBox outline
         g2d.setColor(Color.CYAN);
-        g2d.drawRect(this.x, this.y+this.getHeight(), this.getWidth(), 7);
+        for (int i = 0; i < this.lives; i++) {
+            g2d.drawRect(this.x, this.y + this.getHeight(), this.getWidth(), 7);
+        }
 
         //Draw Lives
+        g2d.setColor(Color.magenta);
+        int offset = 0;
+        for (int i = 0; i < this.lives; i++) {
+            g2d.fillOval(this.x + offset, this.y, 5, 5);
+            offset += 10;
+        }
 
 
         //Draw Health Bar

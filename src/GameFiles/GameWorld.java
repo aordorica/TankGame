@@ -98,7 +98,7 @@ public class GameWorld extends JComponent implements Runnable{
         imageHashMap.put("UnbreakableWall", ImageLoader.loadImages("asteroid.png"));
         imageHashMap.put("PowerUp", ImageLoader.loadImages("powerup.png"));
         imageHashMap.put("Explosion", ImageLoader.loadImages("explosion2.gif"));
-        imageHashMap.put("GameOver", ImageLoader.loadImages("gameOver.png"));
+        imageHashMap.put("GameOver", ImageLoader.loadImages("gameOver2.png"));
     }
 
     @Override
@@ -144,19 +144,20 @@ public class GameWorld extends JComponent implements Runnable{
         minMap.drawRect(0,0,map.getWidth() * 32,map.getHeight() * 32);
         g2.drawImage(screenImage, 0,0,null);
 
+
+        if (tank1.checkDeath() || tank2.checkDeath()) {
+            gameOver(g2);
+            this.stop();
+        }
     }
 
-    private void gameOver() {
-        Graphics2D endGraphics = (Graphics2D) getGraphics();
-        endGraphics.drawImage(imageHashMap.get("GameOver"), 0, 0, null);
+    private void gameOver(Graphics2D g2) {
+        Graphics2D endGraphics = g2;
+        endGraphics.drawImage(imageHashMap.get("GameOver"), width/4, height/8, null);
     }
 
     private void update() {
 
-        if (tank1.getHealth() == 0 || tank2.getHealth() == 0) {
-            this.stop();
-            gameOver();
-        }
         tank1.update();
         tank2.update();
 
