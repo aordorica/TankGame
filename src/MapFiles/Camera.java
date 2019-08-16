@@ -35,11 +35,10 @@ public class Camera {
         if (tank.getX() <= width/4) {
             this.x = 0;
             System.out.println("X set to 0\n");
+        } else if (tank.getX() >= width*2) {
+            this.x = width*-2;
         } else this.x = tank.getX() * -1 + (width / 4);
 
-//        if (tank.getX() >= width+(width/4)) {
-//            this.x = width*-2;
-//        }
         if (tank.getY() <= height/2) {
             this.y = 0;
         } else this.y = tank.getY() * -1 + height / 2;

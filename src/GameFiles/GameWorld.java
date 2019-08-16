@@ -129,7 +129,6 @@ public class GameWorld extends JComponent implements Runnable{
 
 
         //this.map.render(g2);
-        System.out.println("Tank1");
         this.cam1.render(side1, tank2);
         this.cam2.render(side2, tank1);
 
