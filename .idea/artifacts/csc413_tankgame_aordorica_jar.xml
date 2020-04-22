@@ -1,9 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="csc413-tankgame-aordorica:jar">
-    <output-path>$PROJECT_DIR$/jar</output-path>
-    <root id="archive" name="csc413-tankgame-aordorica.jar">
-      <element id="module-output" name="csc413-tankgame-aordorica" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/out/artifacts/csc413_tankgame_aordorica_jar/csc413-tankgame-aordorica.jar" path-in-jar="/" />
-    </root>
-  </artifact>
-</component>
